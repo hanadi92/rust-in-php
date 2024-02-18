@@ -90,7 +90,7 @@ pub extern "C" fn find_departing_trains(
         .delimiter(b',')
         .has_headers(true)
         .flexible(true)
-        .from_path("mini_data.csv")
+        .from_path("../mini_data.csv")
         .expect("Error reading CSV file")
         .deserialize()
         .filter_map(|result| result.ok())

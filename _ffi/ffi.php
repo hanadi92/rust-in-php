@@ -5,7 +5,7 @@ extension_loaded('ffi') or die('FFI extension is not enabled.');
 $ffi = FFI::cdef("
     char* find_departing_trains(char* current_time, char* current_terminal);
     void free_rust_string(char* ptr);
-", __DIR__ . "/target/release/libmytrain.dylib");
+", __DIR__ . "/target/release/lib_ffi.dylib");
 
 // Example inputs
 $currentTime = "14:54:20";
@@ -16,7 +16,6 @@ $startTime = microtime(true);
 $result = $ffi->find_departing_trains($currentTime, $currentTerminal);
 $endTime = microtime(true);
 $elapsedTime = $endTime - $startTime;
-print_r($elapsedTime);
 
 // Convert the result to a PHP string
 $resultStr = FFI::string($result);
@@ -29,3 +28,4 @@ $departingTrains = json_decode($resultStr, true);
 
 // Example: Print the result
 print_r($departingTrains);
+print_r($elapsedTime."\n");
