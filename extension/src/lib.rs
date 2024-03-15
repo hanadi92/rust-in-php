@@ -1,3 +1,5 @@
+#![cfg_attr(windows, feature(abi_vectorcall))]
+
 use std::str::FromStr;
 use ext_php_rs::prelude::*;
 
@@ -75,7 +77,7 @@ impl Train {
 }
 
 #[php_function]
-fn find_departing_trains_php(
+pub fn find_departing_trains_php(
     current_time: &str,
     current_terminal: &str,
 ) -> String {
@@ -86,7 +88,7 @@ fn find_departing_trains_php(
         .delimiter(b',')
         .has_headers(true)
         .flexible(true)
-        .from_path("../../mini_data.csv")
+        .from_path("../mini_data.csv")
         .expect("Error reading CSV file")
         .deserialize()
         .filter_map(|result| result.ok())
@@ -100,6 +102,11 @@ fn find_departing_trains_php(
 
     // Convert departing_trains to a string
     return serde_json::to_string(&departing_trains).unwrap();
+}
+
+#[php_module]
+pub fn get_module(module: ModuleBuilder) -> ModuleBuilder {
+    module
 }
 
 

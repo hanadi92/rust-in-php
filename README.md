@@ -8,7 +8,7 @@ Strategy: building two implementations, in PHP and Rust. Measure performance and
 
 Dataset: train schedule in Stockholm of 2500~ records. Taken from [Kaggle](https://www.kaggle.com/datasets/abdeaitali/commuter-train-timetable).
 
-### ffi
+### ffi solution
 ``cd _ffi``
 
 Build rust with ``cargo build --release --target-dir target``
@@ -16,3 +16,9 @@ Build rust with ``cargo build --release --target-dir target``
 Run php with ``php ffi.php``
 
 Benchmark the rust implementation with ``cargo bench``
+
+### extension solution
+
+``cd _extension``
+``cargo build --release --target-dir target``
+``php -d extension=target/release/libextension.dylib extension.php``

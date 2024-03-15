@@ -5,6 +5,3 @@ members = [
 ]
 default-members = ["_ffi", "extension"]
 resolver = "2"
-
-[workspace.package]
-rust-version = "1.70"
